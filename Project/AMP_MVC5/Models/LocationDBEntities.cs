@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace AMP_MVC5.Models
 {
-    public class LocationDBEntities
+    public class LocationDBEntities : DbContext
     {
+        public System.Data.Entity.DbSet<AMP_MVC5.Models.Customer> Customers { get; set; }
     }
 }

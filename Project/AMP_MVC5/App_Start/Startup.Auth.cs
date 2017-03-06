@@ -58,11 +58,11 @@ namespace Webmap
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "423889026857-1k9oe75gr7hjj9cncqcnego8lm07ieuh.apps.googleusercontent.com",
+                ClientSecret = "nu-X2gC73LOctEX6uwg7JUKo"
+            });
         }
     }
 }

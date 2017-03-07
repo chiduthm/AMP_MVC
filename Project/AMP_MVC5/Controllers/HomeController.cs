@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AMP_MVC5.DataAccess;
+using AMPMVC5.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,12 +12,28 @@ namespace Webmap.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var locations = new[]
+         {
+            new SelectListItem { Value = "US", Text = "United States" },
+            new SelectListItem { Value = "CA", Text = "Canada" },
+            new SelectListItem { Value = "MX", Text = "Mexico" },
+        };
+
+            var model = new FooBarModel
+            {
+                Locations = locations,
+            };
+
+            Location objLocation = new Location();
+            DataAccessLayer objDB = new DataAccessLayer();
+            objLocation.ShowallLocation = objDB.SelectallLocationdata();
+            // return View(model);
+            return View(objLocation);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "This is my applicatin discription!";
 
             return View();
         }

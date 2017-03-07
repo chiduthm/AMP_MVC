@@ -1,4 +1,5 @@
 ﻿using AMP_MVC5.Models;
+using AMPMVC5.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -141,6 +142,46 @@ namespace AMP_MVC5.DataAccess
                     cobj.Birthdate = Convert.ToDateTime(ds.Tables[0].Rows[i]["Birthdate"].ToString());
 
                     custlist.Add(cobj);
+                }
+                return custlist;
+            }
+            catch
+            {
+                return custlist;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        public List<Location> SelectallLocationdata()
+        {
+            SqlConnection con = null;
+
+            DataSet ds = null;
+            List<Location> custlist = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                SqlCommand cmd = new SqlCommand("spGetLoctionToDisplay", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                ds = new DataSet();
+                da.Fill(ds);
+                custlist = new List<Location>();
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    Location lobj = new Location();
+                    lobj.LocationID = Convert.ToInt32(ds.Tables[0].Rows[i]["LocationID"].ToString());
+                    lobj.Name = ds.Tables[0].Rows[i]["Name"].ToString();
+                    lobj.Latitude = ds.Tables[0].Rows[i]["Latitude"].ToString();
+                    lobj.Longitude = ds.Tables[0].Rows[i]["Longitude"].ToString();
+                    lobj.Description = ds.Tables[0].Rows[i]["Description"].ToString();
+                    custlist.Add(lobj);
                 }
                 return custlist;
             }

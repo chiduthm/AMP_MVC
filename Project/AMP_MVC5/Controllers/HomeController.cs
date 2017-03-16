@@ -12,18 +12,6 @@ namespace Webmap.Controllers
     {
         public ActionResult Index()
         {
-            var locations = new[]
-         {
-            new SelectListItem { Value = "US", Text = "United States" },
-            new SelectListItem { Value = "CA", Text = "Canada" },
-            new SelectListItem { Value = "MX", Text = "Mexico" },
-        };
-
-            var model = new FooBarModel
-            {
-                Locations = locations,
-            };
-
             Location objLocation = new Location();
             DataAccessLayer objDB = new DataAccessLayer();
             objLocation.ShowallLocation = objDB.SelectallLocationdata();

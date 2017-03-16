@@ -64,6 +64,6 @@ D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\bin\Microsoft.Owin.Sec
 D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\bin\Microsoft.Owin.Security.Google.xml
 D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\obj\Debug\AMPMVC5.csprojResolveAssemblyReference.cache
 D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\obj\Debug\Webmap.dll
 D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\obj\Debug\Webmap.pdb
+D:\Chidu\NewProject\Repo\AMP_MVC\AMP_MVC\Project\AMP_MVC5\obj\Debug\AMPMVC5.csprojResolveAssemblyReference.cache

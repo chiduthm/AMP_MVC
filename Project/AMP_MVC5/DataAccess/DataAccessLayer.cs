@@ -240,6 +240,113 @@ namespace AMP_MVC5.DataAccess
         }
 
 
+        public string InsertLocData(Location objloc)
+        {
+
+            SqlConnection con = null;
+            string result = "";
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                SqlCommand cmd = new SqlCommand("sp_IUD_Location", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@LocationID", 0);
+                cmd.Parameters.AddWithValue("@Name", objloc.Name);
+                cmd.Parameters.AddWithValue("@Latitude", objloc.Latitude);
+                cmd.Parameters.AddWithValue("@Longitude", objloc.Longitude);
+                cmd.Parameters.AddWithValue("@Description", objloc.Description);
+                cmd.Parameters.AddWithValue("@Query", 1);
+                con.Open();
+                result = cmd.ExecuteScalar().ToString();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                string t = ex.Message;
+                return result = "";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        public Location SelectLocationDatabyID(string LocationID)
+        {
+            SqlConnection con = null;
+            DataSet ds = null;
+            Location lobj = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                SqlCommand cmd = new SqlCommand("sp_IUD_Location", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@LocationID", LocationID);
+                cmd.Parameters.AddWithValue("@Name", null);
+                cmd.Parameters.AddWithValue("@Latitude", null);
+                cmd.Parameters.AddWithValue("@Longitude", null);
+                cmd.Parameters.AddWithValue("@Description", null);
+                cmd.Parameters.AddWithValue("@Query", 5);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                ds = new DataSet();
+                da.Fill(ds);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    lobj = new Location();
+                    lobj.LocationID = Convert.ToInt32(ds.Tables[0].Rows[i]["LocationID"].ToString());
+                    lobj.Name = ds.Tables[0].Rows[i]["Name"].ToString();
+                    lobj.Latitude = ds.Tables[0].Rows[i]["Latitude"].ToString();
+                    lobj.Longitude = ds.Tables[0].Rows[i]["Longitude"].ToString();
+                    lobj.Description = ds.Tables[0].Rows[i]["Description"].ToString();
+                    
+                }
+                return lobj;
+            }
+            catch(Exception ex)
+            {
+                string x = ex.Message;
+                return lobj;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public string UpdateLocationData(Location objloc)
+        {
+            SqlConnection con = null;
+            string result = "";
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                SqlCommand cmd = new SqlCommand("sp_IUD_Location", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@LocationID", objloc.LocationID);
+                cmd.Parameters.AddWithValue("@Name", objloc.Name);
+                cmd.Parameters.AddWithValue("@Latitude", objloc.Latitude);
+                cmd.Parameters.AddWithValue("@Longitude", objloc.Longitude);
+                cmd.Parameters.AddWithValue("@Description", objloc.Description);
+                cmd.Parameters.AddWithValue("@Query", 2);
+                con.Open();
+                result = cmd.ExecuteScalar().ToString();
+                return result;
+            }
+            catch
+            {
+                return result = "";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
 
 
     }

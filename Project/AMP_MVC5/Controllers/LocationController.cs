@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AMP_MVC5.DataAccess;
+using AMPMVC5.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,12 @@ namespace AMP_MVC5.Controllers
         // GET: Location
         public ActionResult Index()
         {
-            return View();
+            Location objLocation = new Location();
+            DataAccessLayer objDB = new DataAccessLayer();
+            objLocation.ShowallLocation = objDB.SelectallLocationdata();
+            // return View(model);
+            return View(objLocation);
+
         }
 
         // GET: Location/Details/5
@@ -28,13 +35,28 @@ namespace AMP_MVC5.Controllers
 
         // POST: Location/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Location objLocation)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+
+                
+                if (ModelState.IsValid) //checking model is valid or not
+                {
+                    DataAccessLayer objDB = new DataAccessLayer();
+                    string result = objDB.InsertLocData(objLocation);
+                    ViewData["result"] = result;
+                    ModelState.Clear(); //clearing model
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error in saving data");
+                    return View();
+                }
             }
             catch
             {
@@ -45,18 +67,36 @@ namespace AMP_MVC5.Controllers
         // GET: Location/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Location objLocation = new Location();
+            DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
+            return View(objDB.SelectLocationDatabyID(id.ToString()));
+            
         }
 
         // POST: Location/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Location objLoc)
         {
             try
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                // return RedirectToAction("Index");
+
+                
+                if (ModelState.IsValid) //checking model is valid or not
+                {
+                    DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
+                    string result = objDB.UpdateLocationData(objLoc);
+                    ViewData["result"] = result;
+                    ModelState.Clear(); //clearing model
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error in saving data");
+                    return View();
+                }
             }
             catch
             {

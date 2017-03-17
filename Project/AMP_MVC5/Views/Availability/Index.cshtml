@@ -3,9 +3,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<a href="#" id="btnInit" class="btn btn-secondary">Initialise database!</a>  
-<div id='calendar' style="width:65%"></div> 
+@*<a href="#" id="btnInit" class="btn btn-secondary">Initialise database!</a>*@  
+<<div class="row"></div>
+<div id='calendar' style="width:65%"></div>
+<div class="row"></div> 
 @section scripts{
 <script>
 
@@ -17,7 +18,7 @@
 		        center: 'title',
 		        right: 'month,agendaWeek,agendaDay'
 		    },
-		    defaultView: 'agendaDay',
+		    defaultView: 'month',
 		    editable: true,
 		    allDaySlot: false,
 		    selectable: true,
@@ -77,7 +78,21 @@
 		});
 		CalLoading = false;
 	});
-
+	$('#btnInit').click(function () {
+	    $.ajax({
+	        type: 'POST',
+	        url: "/Availability/Init",
+	        success: function (response) {
+	            if (response == 'True') {
+	                $('#calendar').fullCalendar('refetchEvents');
+	                alert('Database populated! ');
+	            }
+	            else {
+	                alert('Error, could not populate database!');
+	            }
+	        }
+	    });
+	});
 </script>
     }
 

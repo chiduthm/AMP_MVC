@@ -1,4 +1,5 @@
 ﻿using AMP_MVC5.Models;
+using AMPMVC5;
 using AMPMVC5.Models;
 using System;
 using System.Collections.Generic;
@@ -338,6 +339,49 @@ namespace AMP_MVC5.DataAccess
             catch
             {
                 return result = "";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<AppointmentDiary> SelectallAvailabilitydata()
+
+        {
+            SqlConnection con = null;
+
+            DataSet ds = null;
+            List<AppointmentDiary> aptlist = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                SqlCommand cmd = new SqlCommand("sp_IUD_Availability", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Query", 4);
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                ds = new DataSet();
+                da.Fill(ds);
+                aptlist = new List<AppointmentDiary>();
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    string StringDate = string.Format("{0:yyyy-MM-dd}", ds.Tables[0].Rows[i]["DateTimeScheduled"]);
+                    AppointmentDiary aobj = new AppointmentDiary();
+                    aobj.id = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
+                    aobj.someKey = Convert.ToInt16(ds.Tables[0].Rows[i]["SomeImportantKey"]);
+                    aobj.allDay = Convert.ToInt16(ds.Tables[0].Rows[i]["StatusENUM"]);
+                    aobj.title =Convert.ToString(ds.Tables[0].Rows[i]["Title"]);
+                    aobj.start = StringDate + "T00:00:00"; 
+                    aobj.end = StringDate + "T23:59:59";
+                    aptlist.Add(aobj);
+                }
+                return aptlist;
+            }
+            catch
+            {
+                return aptlist;
             }
             finally
             {

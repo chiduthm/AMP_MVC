@@ -1,9 +1,13 @@
-﻿using System;
+﻿using AMP_MVC5.DataAccess;
+
+using AMPMVC5.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AMPMVC5.Controllers
 {
@@ -27,6 +31,60 @@ namespace AMPMVC5.Controllers
                 }
             }
             return View();
+        }
+
+        public JsonResult GetDiarySummary(double start, double end)
+        {
+            //var ApptListForDate = AMPEvents.LoadAppointmentSummaryInDateRange(start, end);
+            //var eventList = from e in ApptListForDate
+            //                select new
+            //                {
+            //                    id = e.ID,
+            //                    title = e.Title,
+            //                    start = e.StartDateString,
+            //                    end = e.EndDateString,
+            //                    someKey = e.SomeImportantKeyID,
+            //                    allDay = false
+            //                };
+            //var rows = eventList.ToArray();
+            AppointmentDiary objAppointment = new AppointmentDiary();
+            DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
+            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata();
+            //return View(objCustomer);
+            string jsonData = new JavaScriptSerializer().Serialize(Json(objAppointment.ShowallAppointment, JsonRequestBehavior.AllowGet));
+            string json = new JavaScriptSerializer().Serialize(objAppointment.ShowallAppointment);
+            return Json(objAppointment.ShowallAppointment, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDiaryEvents(double start, double end)
+        {
+            //var ApptListForDate = AMPEvents.LoadAllAppointmentsInDateRange(start, end);
+            //var eventList = from e in ApptListForDate
+            //                select new
+            //                {
+            //                    id = e.ID,
+            //                    title = e.Title,
+            //                    start = e.StartDateString,
+            //                    end = e.EndDateString,
+            //                    color = e.StatusColor,
+            //                    className = e.ClassName,
+            //                    someKey = e.SomeImportantKeyID,
+            //                    allDay = false
+            //                };
+            //var rows = eventList.ToArray();
+            //string jsonData = new JavaScriptSerializer().Serialize(Json(rows, JsonRequestBehavior.AllowGet));
+            //string json = new JavaScriptSerializer().Serialize(rows);
+
+            AppointmentDiary objAppointment = new AppointmentDiary();
+            DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
+            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata();
+
+            return Json(objAppointment, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool SaveEvent(string Title, string NewEventDate, string NewEventTime, string NewEventDuration)
+        {
+            return AMPEvents.CreateNewEvent(Title, NewEventDate, NewEventTime, NewEventDuration);
         }
 
         public string Init()

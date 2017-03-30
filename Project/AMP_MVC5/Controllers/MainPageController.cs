@@ -11,8 +11,8 @@ namespace AMPMVC5.Controllers
         // GET: MainPage
         public ActionResult Index()
         {
-            ServiceReference1.Service1Client objLocService = new ServiceReference1.Service1Client();
-            return View(objLocService.getLocation());
+            
+            return View();
         }
     }
 }

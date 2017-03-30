@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMPMVC5", "AMPMVC5.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMPWCF", "..\AMPWCF\AMPWCF.csproj", "{C3635446-B5B7-41D2-BEA6-19BC8527B118}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullCalendar_MVC", "..\..\..\..\..\RefferedProjects\FullCalendar_MVC\FullCalendar_MVC\FullCalendar_MVC.csproj", "{92243BC7-778E-419C-BA07-64D4ED29DBA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{C3635446-B5B7-41D2-BEA6-19BC8527B118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3635446-B5B7-41D2-BEA6-19BC8527B118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3635446-B5B7-41D2-BEA6-19BC8527B118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92243BC7-778E-419C-BA07-64D4ED29DBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92243BC7-778E-419C-BA07-64D4ED29DBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92243BC7-778E-419C-BA07-64D4ED29DBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92243BC7-778E-419C-BA07-64D4ED29DBA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

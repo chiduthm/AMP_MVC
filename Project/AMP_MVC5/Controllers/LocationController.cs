@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AMP_MVC5.Controllers
 {
@@ -20,6 +21,8 @@ namespace AMP_MVC5.Controllers
             return View(objLocation);
 
         }
+
+      
 
         // GET: Location/Details/5
         public ActionResult Details(int id)

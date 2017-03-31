@@ -15,6 +15,7 @@ namespace AMPMVC5.Controllers
     {
         // GET: Availability
         public ActionResult Index()
+
         {
 
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -49,7 +50,22 @@ namespace AMPMVC5.Controllers
             //var rows = eventList.ToArray();
             AppointmentDiary objAppointment = new AppointmentDiary();
             DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
-            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata();
+            string userIdValue = string.Empty;
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    userIdValue = userIdClaim.Value;
+                }
+            }
+
+            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata(userIdValue);
             //return View(objCustomer);
             string jsonData = new JavaScriptSerializer().Serialize(Json(objAppointment.ShowallAppointment, JsonRequestBehavior.AllowGet));
             string json = new JavaScriptSerializer().Serialize(objAppointment.ShowallAppointment);
@@ -74,10 +90,25 @@ namespace AMPMVC5.Controllers
             //var rows = eventList.ToArray();
             //string jsonData = new JavaScriptSerializer().Serialize(Json(rows, JsonRequestBehavior.AllowGet));
             //string json = new JavaScriptSerializer().Serialize(rows);
+            string userIdValue = string.Empty;
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    userIdValue = userIdClaim.Value;
+                }
+            }
+
 
             AppointmentDiary objAppointment = new AppointmentDiary();
             DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
-            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata();
+            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata(userIdValue);
 
             return Json(objAppointment, JsonRequestBehavior.AllowGet);
         }

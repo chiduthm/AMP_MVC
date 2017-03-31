@@ -51,7 +51,7 @@ namespace AMPMVC5.Models
 
             AppointmentDiary objAppointment = new AppointmentDiary();
             DataAccessLayer objDB = new DataAccessLayer(); //calling class DBdata
-            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata();
+            objAppointment.ShowallAppointment = objDB.SelectallAvailabilitydata(null);
             return objAppointment.ShowallAppointment;
 
         }

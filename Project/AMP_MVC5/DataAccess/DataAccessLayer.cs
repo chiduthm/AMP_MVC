@@ -346,7 +346,7 @@ namespace AMP_MVC5.DataAccess
             }
         }
 
-        public List<AppointmentDiary> SelectallAvailabilitydata()
+        public List<AppointmentDiary> SelectallAvailabilitydata(string userId)
 
         {
             SqlConnection con = null;
@@ -358,6 +358,7 @@ namespace AMP_MVC5.DataAccess
                 con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
                 SqlCommand cmd = new SqlCommand("sp_IUD_Availability", con);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserId", userId);
                 cmd.Parameters.AddWithValue("@Query", 4);
                 con.Open();
                 SqlDataAdapter da = new SqlDataAdapter();
